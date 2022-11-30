@@ -7,7 +7,6 @@ public class RainCloud : MonoBehaviour
 
     public Transform[] Human;
     public Transform Cloud;
-    public ParticleSystem Rain;
     float SpeedMove = 10f;
     int i = 0;
     void Update()
