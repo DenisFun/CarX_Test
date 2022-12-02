@@ -2,3 +2,5 @@
 Temp
 Logs
 UserSettings
+*.csproj
+CarX_Test.sln

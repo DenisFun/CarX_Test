@@ -14,7 +14,5 @@ public class Change : MonoBehaviour
         {
             CurrentTools.mesh = NewTools;
         }
-        
-
     }
 }
