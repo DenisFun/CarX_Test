@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
- /*    [SerializeFiled]
-    private GameObject Stone;
-    [SerializeFiled]
-    private GameObject Pos;
+	[SerializeField]
+	private SpawnStone m_stoneSpawner;
 
-    private float m_timer = 0.0f;
+	private float m_timer = 0f;
+	[SerializeField]
+	private float m_delay = 1f;
 
-    void Update() 
-    {
-        if(Input.GetKeyDown(KeyCode.X))
-        {
-            Destroy(Instantiate(Stone, Pos.transform.position, Quaternion.identity), 20f);
-        }
-    } */
+	private void Update()
+	{
+		m_timer += Time.deltaTime;
+		if (m_timer >= m_delay)
+		{
+			m_stoneSpawner.Spawn();
+			m_timer -= m_delay;
+		}
+	}
+	
+
 }
