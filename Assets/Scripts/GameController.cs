@@ -1,25 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Game : MonoBehaviour
+namespace Game
 {
-	[SerializeField]
-	private SpawnStone m_stoneSpawner;
+    public class GameController : MonoBehaviour
+    {
+        [SerializeField]
+        private SpawnStone m_stoneSpawner;
 
-	private float m_timer = 0f;
-	[SerializeField]
-	private float m_delay = 1f;
+        private float m_timer = 0f;
 
-	private void Update()
-	{
-		m_timer += Time.deltaTime;
-		if (m_timer >= m_delay)
-		{
-			m_stoneSpawner.Spawn();
-			m_timer -= m_delay;
-		}
-	}
-	
+        [SerializeField]
+        private float m_delay = 1f;
 
+        [SerializeField]
+        private Animation anim;
+        private bool m_Idle;
+        private bool m_Push;
+
+        [SerializeField]
+        private float m_power = 100f;
+        Vector3 vec = new Vector3(-10, 10, 1);
+
+        public void Update()
+        {
+            m_timer += Time.deltaTime;
+            if (m_timer >= m_delay)
+            {
+                m_stoneSpawner.Spawn();
+                m_timer -= m_delay;
+            }
+        }
+
+        public void Up()
+        {
+			anim.PushTrue();
+            anim.KickFalse();
+            //anim._Idle();
+            //Debug.Log("Space key was released.");
+        }
+
+        public void Down()
+        {
+            anim.KickTrue();
+			anim.PushFalse();
+            //anim.Idle();
+            //Debug.Log("Space key was pressed.");
+        }
+
+        public void OnCollisionStone(Collision collision)
+        {
+            if (collision.gameObject.TryGetComponent<Stone>(out var stone))
+            {
+                stone.SetAffect(false);
+                //var contact = collision.contacts[0];
+                var contact = collision.GetContact(0);
+                var body = contact.otherCollider.GetComponent<Rigidbody>();
+                if (contact.normal != null)
+                {
+                    body.AddForce(vec * m_power, ForceMode.Impulse);
+                }
+                Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
+            }
+        }
+    }
 }
