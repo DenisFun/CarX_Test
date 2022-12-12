@@ -7,10 +7,9 @@ namespace Game
 {
     public class GameController : MonoBehaviour
     {
-        [SerializeField]
-        private SpawnStone m_stoneSpawner;
-
-        private float m_timer = 0f;
+		[SerializeField]
+		private SpawnStone m_stoneSpawner;
+		private float m_timer = 0f;
 
         [SerializeField]
         private float m_delay = 1f;
@@ -36,16 +35,16 @@ namespace Game
 
         public void Up()
         {
-			anim.PushTrue();
-            anim.KickFalse();
+            anim.KickTrue();
+            anim.PushFalse();
             //anim._Idle();
             //Debug.Log("Space key was released.");
         }
 
         public void Down()
         {
-            anim.KickTrue();
-			anim.PushFalse();
+            anim.PushTrue();
+            anim.KickFalse();
             //anim.Idle();
             //Debug.Log("Space key was pressed.");
         }
@@ -58,12 +57,31 @@ namespace Game
                 //var contact = collision.contacts[0];
                 var contact = collision.GetContact(0);
                 var body = contact.otherCollider.GetComponent<Rigidbody>();
-                if (contact.normal != null)
-                {
-                    body.AddForce(vec * m_power, ForceMode.Impulse);
-                }
+                body.AddForce(vec * m_power, ForceMode.Impulse);
                 Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
+        }
+
+        private void Start()
+        {
+            StartGame();
+        }
+
+        public void StartGame()
+        {
+            GameEvent.onGameOver += OnGameOver;
+        }
+
+        private void OnGameOver()
+        {
+            GameEvent.onGameOver -= OnGameOver;
+			//m_stoneSpawner.DestroyK();
+			Debug.Log("Game Over");
+        }
+
+        private void OnDestroy()
+        {
+            GameEvent.onGameOver -= OnGameOver;
         }
     }
 }
