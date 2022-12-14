@@ -54,10 +54,11 @@ namespace Game
             if (collision.gameObject.TryGetComponent<Stone>(out var stone))
             {
                 stone.SetAffect(false);
-                //var contact = collision.contacts[0];
-                var contact = collision.GetContact(0);
+                var contact = collision.contacts[0];
+                //var contact = collision.GetContact(0);
                 var body = contact.otherCollider.GetComponent<Rigidbody>();
-                body.AddForce(vec * m_power, ForceMode.Impulse);
+                var stick = contact.thisCollider.GetComponent<CollisionPlow>();
+                body.AddForce(stick.dir * m_power, ForceMode.Impulse);
                 Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
         }
@@ -75,7 +76,7 @@ namespace Game
         private void OnGameOver()
         {
             GameEvent.onGameOver -= OnGameOver;
-			//m_stoneSpawner.DestroyK();
+			m_stoneSpawner.DestroyK();
 			Debug.Log("Game Over");
         }
 

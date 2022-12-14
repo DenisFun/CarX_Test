@@ -18,9 +18,9 @@ namespace Game
 			Quaternion rotation = transform.rotation;
 			a = Instantiate(m_prefabStone, position, rotation);
 		}
-		/* public void DestroyK()
+		public void DestroyK()
 		{
-			Destroy(gameObject);
-		} */
+			Destroy(a);
+		}
 	}
 }
