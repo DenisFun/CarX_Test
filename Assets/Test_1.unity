@@ -4286,8 +4286,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.069757, y: 0.14524476, z: 0.15661599}
-  m_Center: {x: 0.00053093955, y: 1.0846583, z: 0.0023441813}
+  m_Size: {x: 0.732937, y: 0.14524476, z: 0.15661599}
+  m_Center: {x: -0.08752921, y: 1.0931442, z: 0.0023433238}
 --- !u!54 &483739723
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11597,6 +11597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -15721,7 +15722,7 @@ MonoBehaviour:
   m_stoneSpawner: {fileID: 59217357}
   m_delay: 2
   anim: {fileID: 948974372208000121}
-  m_power: 1
+  m_power: 40
 --- !u!1001 &1853633042
 PrefabInstance:
   m_ObjectHideFlags: 0
