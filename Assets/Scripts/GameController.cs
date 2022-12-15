@@ -14,12 +14,16 @@ namespace Game
         [SerializeField] private Animation m_anim;
 
 		[SerializeField] private float m_power = 100f;
-		[SerializeField] private UIMenyController m_uiMenyScoreCount;
+		[SerializeField] private UIMenyController m_uiMeny;
 		private int m_score = 0;
 		private bool m_Idle;
         private bool m_Push;
 		private float m_timer = 0f;
 
+		public void Start()
+		{
+			m_uiMeny.MainMenyState();
+		}
         public void Update()
         {
             m_timer += Time.deltaTime;
@@ -54,15 +58,10 @@ namespace Game
 
                 body.AddForce(stick.dir * m_power, ForceMode.Impulse);
 				m_score++;
-				m_uiMenyScoreCount.RefreshScore(m_score);
+				m_uiMeny.RefreshScore(m_score);
 
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
-        }
-
-        private void Start()
-        {
-            StartGame();
         }
 
         public void StartGame()
