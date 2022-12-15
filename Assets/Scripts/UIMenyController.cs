@@ -15,7 +15,6 @@ namespace Game
 		[SerializeField]
 		private GameController m_gameController;
 
-
 		public void RefreshScore(int m_score)
 		{
 			m_scorePanel.SetScore(m_score);
@@ -30,11 +29,12 @@ namespace Game
 
 		public void GameState()
 		{
+
 			m_gameController.Start();
+			m_gameController.CalcNextDelay();
 			m_gameController.enabled = true;
 			m_mainMenyPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
 		}
-
 	}
 }
