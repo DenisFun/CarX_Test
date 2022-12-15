@@ -7,21 +7,18 @@ namespace Game
 {
     public class GameController : MonoBehaviour
     {
-		[SerializeField]
-		private SpawnStone m_stoneSpawner;
-		private float m_timer = 0f;
+		[SerializeField] private SpawnStone m_stoneSpawner;
 
-        [SerializeField]
-        private float m_delay = 1f;
+        [SerializeField] private float m_delay = 1f;
 
-        [SerializeField]
-        private Animation anim;
-        private bool m_Idle;
+        [SerializeField] private Animation m_anim;
+
+		[SerializeField] private float m_power = 100f;
+		[SerializeField] private UIMenyController m_uiMenyScoreCount;
+		private int m_score = 0;
+		private bool m_Idle;
         private bool m_Push;
-
-        [SerializeField]
-        private float m_power = 100f;
-        Vector3 vec = new Vector3(-10, 10, 1);
+		private float m_timer = 0f;
 
         public void Update()
         {
@@ -35,18 +32,14 @@ namespace Game
 
         public void Up()
         {
-            anim.KickTrue();
-            anim.PushFalse();
-            //anim._Idle();
-            //Debug.Log("Space key was released.");
+			m_anim.PushFalse();
+            m_anim.KickTrue();
         }
 
         public void Down()
         {
-            anim.PushTrue();
-            anim.KickFalse();
-            //anim.Idle();
-            //Debug.Log("Space key was pressed.");
+            m_anim.PushTrue();
+            m_anim.KickFalse();
         }
 
         public void OnCollisionStone(Collision collision)
@@ -54,12 +47,16 @@ namespace Game
             if (collision.gameObject.TryGetComponent<Stone>(out var stone))
             {
                 stone.SetAffect(false);
+
                 var contact = collision.contacts[0];
-                //var contact = collision.GetContact(0);
                 var body = contact.otherCollider.GetComponent<Rigidbody>();
                 var stick = contact.thisCollider.GetComponent<CollisionPlow>();
+
                 body.AddForce(stick.dir * m_power, ForceMode.Impulse);
-                Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
+				m_score++;
+				m_uiMenyScoreCount.RefreshScore(m_score);
+
+				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
         }
 
@@ -76,7 +73,6 @@ namespace Game
         private void OnGameOver()
         {
             GameEvent.onGameOver -= OnGameOver;
-			m_stoneSpawner.DestroyK();
 			Debug.Log("Game Over");
         }
 

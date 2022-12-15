@@ -22,7 +22,7 @@ namespace Game
 		private void Update()
 		{
 			m_direction = transform.position - m_lastPosition;
-			m_lastPosition = transform.position;	
+			m_lastPosition = transform.position;
 		}
     }
 }

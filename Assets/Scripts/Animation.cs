@@ -8,15 +8,6 @@ namespace Game
 	{
 		[SerializeField]
 		private Animator anim;
-
-		/* public void Idle()
-				{
-					anim.SetBool("Idle",true);
-				}
-				public void _Idle()
-				{
-					anim.SetBool("Idle",false); 
-				}  */
 		public void PushFalse()
 		{
 			anim.SetBool("Zamah", false);
