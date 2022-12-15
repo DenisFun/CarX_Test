@@ -10,42 +10,28 @@ namespace Game
 		[SerializeField] private SpawnStone m_stoneSpawner;
 
         [SerializeField] private float m_delay = 1f;
-
-        [SerializeField] private Animation m_anim;
-
 		[SerializeField] private float m_power = 100f;
-		[SerializeField] private UIMenyController m_uiMeny;
+		[SerializeField] private UIMenyController m_MenyUI;
 		private int m_score = 0;
-		private bool m_Idle;
-        private bool m_Push;
+		private int m_maxScore = 0;
 		private float m_timer = 0f;
+		private List<GameObject> m_stones = new();
 
 		public void Start()
 		{
-			m_uiMeny.MainMenyState();
+			m_MenyUI.MainMenyState();
+			StartGame();
 		}
         public void Update()
         {
             m_timer += Time.deltaTime;
             if (m_timer >= m_delay)
             {
-                m_stoneSpawner.Spawn();
+                var stone = m_stoneSpawner.Spawn();
+				m_stones.Add(stone);
                 m_timer -= m_delay;
             }
         }
-
-        public void Up()
-        {
-			m_anim.PushFalse();
-            m_anim.KickTrue();
-        }
-
-        public void Down()
-        {
-            m_anim.PushTrue();
-            m_anim.KickFalse();
-        }
-
         public void OnCollisionStone(Collision collision)
         {
             if (collision.gameObject.TryGetComponent<Stone>(out var stone))
@@ -58,12 +44,19 @@ namespace Game
 
                 body.AddForce(stick.dir * m_power, ForceMode.Impulse);
 				m_score++;
-				m_uiMeny.RefreshScore(m_score);
-
+				m_maxScore = Mathf.Max(m_score, m_maxScore);
+				m_MenyUI.RefreshScore(m_score);
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
         }
-
+		private void ClearStones()
+		{
+			foreach (GameObject stone in m_stones)
+			{
+				Destroy(stone);
+			}
+			m_stones.Clear();
+		}
         public void StartGame()
         {
             GameEvent.onGameOver += OnGameOver;
@@ -73,11 +66,8 @@ namespace Game
         {
             GameEvent.onGameOver -= OnGameOver;
 			Debug.Log("Game Over");
-        }
-
-        private void OnDestroy()
-        {
-            GameEvent.onGameOver -= OnGameOver;
-        }
+			m_MenyUI.MainMenyState();
+			ClearStones();
+		}
     }
 }

@@ -8,11 +8,11 @@ namespace Game
 	{
 		[SerializeField]
 		private GameObject m_prefabStone;
-		public void Spawn()
+		public GameObject Spawn()
 		{
 			Vector3 position = transform.position;
 			Quaternion rotation = transform.rotation;
-			GameObject.Instantiate(m_prefabStone, position, rotation);
+			return GameObject.Instantiate(m_prefabStone, position, rotation);
 		}
 	}
 }

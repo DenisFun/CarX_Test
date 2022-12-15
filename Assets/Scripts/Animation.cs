@@ -7,23 +7,34 @@ namespace Game
 	public class Animation : MonoBehaviour
 	{
 		[SerializeField]
-		private Animator anim;
+		private Animator m_anim;
 		public void PushFalse()
 		{
-			anim.SetBool("Zamah", false);
+			m_anim.SetBool("Zamah", false);
 		}
 		public void PushTrue()
 		{
-			anim.SetBool("Zamah", true);
+			m_anim.SetBool("Zamah", true);
 		}
 		public void KickTrue()
 		{
-			anim.SetBool("Udar", true);
+			m_anim.SetBool("Udar", true);
 		}
 		public void KickFalse()
 		{
-			anim.SetBool("Udar", false);
+			m_anim.SetBool("Udar", false);
 		}
+		public void Up()
+        {
+			PushFalse();
+            KickTrue();
+        }
+
+        public void Down()
+        {
+            PushTrue();
+            KickFalse();
+        }
 	}
 }
 

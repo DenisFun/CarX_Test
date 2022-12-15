@@ -12,6 +12,9 @@ namespace Game
 		private GameObject m_mainMenyPanel;
 		[SerializeField]
 		private GameObject m_gamePanel;
+		[SerializeField]
+		private GameController m_gameController;
+
 
 		public void RefreshScore(int m_score)
 		{
@@ -20,14 +23,15 @@ namespace Game
 
 		public void MainMenyState()
 		{
-			enabled = false;
+			m_gameController.enabled = false;
 			m_mainMenyPanel.SetActive(true);
 			m_gamePanel.SetActive(false);
 		}
 
 		public void GameState()
 		{
-			enabled = true;
+			m_gameController.Start();
+			m_gameController.enabled = true;
 			m_mainMenyPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
 		}
