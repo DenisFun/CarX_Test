@@ -33,8 +33,8 @@ namespace Game
         private void OnGameOver()
         {
             GameEvent.onGameOver -= OnGameOver;
-			//m_MenyUI.MainMenyState();
-			//ClearStones();
+			m_MenyUI.MainMenyState();
+			ClearStones();
 		}
 		private void ClearStones()
 		{
