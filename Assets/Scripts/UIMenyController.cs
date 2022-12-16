@@ -37,5 +37,10 @@ namespace Game
 			m_mainMenyPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
 		}
+		
+		public void Exit()
+		{
+			Application.Quit();
+		}
 	}
 }
