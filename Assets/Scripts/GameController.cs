@@ -25,6 +25,8 @@ namespace Game
 			m_MenyUI.MainMenyState();
 			StartGame();
 			m_maxDelay = m_gameSettings.maxDelay;
+			m_score = 0;
+			m_MenyUI.RefreshScore(m_score);
 		}
 		public void StartGame()
         {
