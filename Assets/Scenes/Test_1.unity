@@ -5271,7 +5271,7 @@ GameObject:
   - component: {fileID: 595811850}
   - component: {fileID: 595811852}
   m_Layer: 0
-  m_Name: MainMenyCamera
+  m_Name: MainMenuCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14042,7 +14042,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1532979063}
   m_Layer: 5
-  m_Name: MainMenyPanel
+  m_Name: MainMenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17264,7 +17264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_stoneSpawner: {fileID: 59217357}
   m_power: 40
-  m_MenyUI: {fileID: 2138516965}
+  m_MenuUI: {fileID: 2138516965}
   m_gameSettings: {fileID: 11400000, guid: 49deb89cec8566a4787ec37e0b7ca311, type: 2}
 --- !u!1001 &1853633042
 PrefabInstance:
@@ -20090,7 +20090,7 @@ GameObject:
   - component: {fileID: 2138516966}
   - component: {fileID: 2138516965}
   m_Layer: 0
-  m_Name: UIMenyController
+  m_Name: UIMenuController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20109,11 +20109,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_scorePanel: {fileID: 295062132}
-  m_mainMenyPanel: {fileID: 1532979062}
+  m_mainMenuPanel: {fileID: 1532979062}
   m_gamePanel: {fileID: 980862937}
   m_gameController: {fileID: 1850935742}
   m_playCamera: {fileID: 674816978}
-  m_mainMenyCamera: {fileID: 595811852}
+  m_mainMenuCamera: {fileID: 595811852}
 --- !u!4 &2138516966
 Transform:
   m_ObjectHideFlags: 0

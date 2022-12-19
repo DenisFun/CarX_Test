@@ -4,37 +4,37 @@ using UnityEngine;
 
 namespace Game
 {
-	public class UIMenyController : MonoBehaviour
+	public class UIMenuController : MonoBehaviour
 	{
 		[SerializeField] private UIScorePanel m_scorePanel;
-		[SerializeField] private GameObject m_mainMenyPanel;
+		[SerializeField] private GameObject m_mainMenuPanel;
 		[SerializeField] private GameObject m_gamePanel;
 		[SerializeField] private GameController m_gameController;
 		[SerializeField] private Camera m_playCamera;
-		[SerializeField] private Camera m_mainMenyCamera;
+		[SerializeField] private Camera m_mainMenuCamera;
 
 		public void RefreshScore(int m_score)
 		{
 			m_scorePanel.SetScore(m_score);
 		}
 
-		public void MainMenyState()
+		public void MainMenuState()
 		{
-			m_mainMenyCamera.enabled = true;
+			m_mainMenuCamera.enabled = true;
         	m_playCamera.enabled = false;
 			m_gameController.enabled = false;
-			m_mainMenyPanel.SetActive(true);
+			m_mainMenuPanel.SetActive(true);
 			m_gamePanel.SetActive(false);
 		}
 
 		public void GameState()
 		{
 			m_gameController.Start();
-			m_mainMenyCamera.enabled = false;
+			m_mainMenuCamera.enabled = false;
         	m_playCamera.enabled = true;
 			m_gameController.CalcNextDelay();
 			m_gameController.enabled = true;
-			m_mainMenyPanel.SetActive(false);
+			m_mainMenuPanel.SetActive(false);
 			m_gamePanel.SetActive(true);
 		}
 		

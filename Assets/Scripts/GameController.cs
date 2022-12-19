@@ -9,7 +9,7 @@ namespace Game
     {
 		[SerializeField] private SpawnStone m_stoneSpawner;
 		[SerializeField] private float m_power = 100f;
-		[SerializeField] private UIMenyController m_MenyUI;
+		[SerializeField] private UIMenuController m_MenuUI;
 		[SerializeField] private GameSettings m_gameSettings;
 
 		private List<GameObject> m_stones = new();
@@ -22,11 +22,11 @@ namespace Game
 
 		public void Start()
 		{
-			m_MenyUI.MainMenyState();
+			m_MenuUI.MainMenuState();
 			StartGame();
 			m_maxDelay = m_gameSettings.maxDelay;
 			m_score = 0;
-			m_MenyUI.RefreshScore(m_score);
+			m_MenuUI.RefreshScore(m_score);
 		}
 		public void StartGame()
         {
@@ -35,7 +35,7 @@ namespace Game
         private void OnGameOver()
         {
             GameEvent.onGameOver -= OnGameOver;
-			m_MenyUI.MainMenyState();
+			m_MenuUI.MainMenuState();
 			ClearStones();
 		}
 		private void ClearStones()
@@ -79,7 +79,7 @@ namespace Game
                 body.AddForce(stick.dir * m_power, ForceMode.Impulse);
 				m_score++;
 				m_maxScore = Mathf.Max(m_score, m_maxScore);
-				m_MenyUI.RefreshScore(m_score);
+				m_MenuUI.RefreshScore(m_score);
 				
 				Physics.IgnoreCollision(contact.thisCollider, contact.otherCollider, true);
             }
