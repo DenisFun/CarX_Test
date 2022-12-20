@@ -5,7 +5,6 @@ using System.Collections;
 
 public class FreeCamera : MonoBehaviour
 {
-
 	public float speed = 1.5f;
 	public float acceleration = 10f;
 	public float sensitivity = 5f; // чувствительность мыши

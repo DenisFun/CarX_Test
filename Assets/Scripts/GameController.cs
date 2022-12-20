@@ -30,11 +30,18 @@ namespace Game
 		}
 		public void StartGame()
         {
-            GameEvent.onGameOver += OnGameOver;
+            GameEvent.onCollisionStones += CheckGameOver;
         }
-        private void OnGameOver()
+		private void CheckGameOver(Stone stone1, Stone stone2)
+		{
+			if (stone1.isAffect && stone2.isAffect)
+			{
+				GameOver();
+			}
+		}
+        private void GameOver()
         {
-            GameEvent.onGameOver -= OnGameOver;
+            GameEvent.onCollisionStones -= CheckGameOver;
 			m_MenuUI.MainMenuState();
 			ClearStones();
 		}
@@ -46,10 +53,6 @@ namespace Game
 			}
 			m_stones.Clear();
 		}
-		public float CalcNextDelay()
-		{
-			 return Random.Range(m_gameSettings.minDelay, m_maxDelay);
-		} 
         public void Update()
         {
             m_timer += Time.deltaTime;
@@ -66,11 +69,15 @@ namespace Game
 				}
 			}
 		}
+		public float CalcNextDelay()
+		{
+			 return Random.Range(m_gameSettings.minDelay, m_maxDelay);
+		} 
         public void OnCollisionStone(Collision collision)
         {
             if (collision.gameObject.TryGetComponent<Stone>(out var stone))
             {
-                stone.SetAffect(false);
+                stone.isAffect = false;
 
                 var contact = collision.contacts[0];
                 var body = contact.otherCollider.GetComponent<Rigidbody>();

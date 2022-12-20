@@ -7,8 +7,7 @@ namespace Game
 {
     public class CollisionPlow : MonoBehaviour
     {
-		[SerializeField]
-		private UnityEvent<Collision> onCollisionStone;
+		[SerializeField] private UnityEvent<Collision> onCollisionStone;
 
 		private Vector3 m_lastPosition;
 		private Vector3 m_direction;
@@ -18,7 +17,6 @@ namespace Game
 		{
 			onCollisionStone.Invoke(other);
 		}
-
 		private void Update()
 		{
 			m_direction = transform.position - m_lastPosition;

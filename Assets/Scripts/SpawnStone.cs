@@ -6,8 +6,7 @@ namespace Game
 {
 	public class SpawnStone : MonoBehaviour
 	{
-		[SerializeField]
-		private GameObject m_prefabStone;
+		[SerializeField] private GameObject m_prefabStone;
 		public GameObject Spawn()
 		{
 			Vector3 position = transform.position;
