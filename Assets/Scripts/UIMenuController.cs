@@ -12,6 +12,7 @@ namespace Game
 		[SerializeField] private GameController m_gameController;
 		[SerializeField] private Camera m_playCamera;
 		[SerializeField] private Camera m_mainMenuCamera;
+		[SerializeField] private AnimationTarget m_animTarget;
 
 		public void RefreshScore(int m_score)
 		{
@@ -32,6 +33,7 @@ namespace Game
 			m_gameController.Start();
 			m_mainMenuCamera.enabled = false;
         	m_playCamera.enabled = true;
+			m_animTarget.TargetAnimFalse();
 			m_gameController.CalcNextDelay();
 			m_gameController.enabled = true;
 			m_mainMenuPanel.SetActive(false);

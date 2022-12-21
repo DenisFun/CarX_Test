@@ -11,6 +11,10 @@ namespace Game
     	{
         	m_targetAnimation.SetBool("CollisionTarget", true);
     	}
+		public void TargetAnimFalse()
+    	{
+        	m_targetAnimation.SetBool("CollisionTarget", false);
+    	}
 		private void OnCollisionEnter(Collision stoneOther)
 		{
 			TargetAnimTrue();
